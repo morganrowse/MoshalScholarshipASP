@@ -1,0 +1,156 @@
+@using Microsoft.AspNetCore.Identity
+@using MoshalScholarship.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model MoshalScholarship.Models.StudentDetailViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@Model.Student.User.FirstName, @Model.Student.User.LastName</h2>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.Degree)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.Degree)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.Institution)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.Institution)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.Faculty)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.Faculty)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.IdentityNumber)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.IdentityNumber)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.PassportNumber)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.PassportNumber)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.Nationality)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.Nationality)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.WorkLocation)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.WorkLocation)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.PreferredCompany)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.PreferredCompany)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.PreferredJob)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.PreferredJob)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.StudentCount)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.StudentCount)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.AddressLine1)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.AddressLine1)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.AddressLine2)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.AddressLine2)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.AddressLine3)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.AddressLine3)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Student.AddressLine4)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Student.AddressLine4)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <div class="messsages" id="messages">
+                @foreach (var item in Model.Messages)
+                {
+                    @if (@item.FromUserId == UserManager.GetUserId(User))
+                    {
+                        <p class="message message-current">
+                            <b>@item.FromUser.FirstName @item.FromUser.LastName</b>
+                            <i><span class="pull-right"><span class="glyphicon glyphicon-time"></span>  @item.CreatedAt.ToString("H:mm d/MM/yyyy")</span></i>
+                            <br />
+                            @item.Body
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="message message-recipient">
+                            <b>@item.FromUser.FirstName @item.FromUser.LastName</b>
+                            <i><span class="pull-right"><span class="glyphicon glyphicon-time"></span>  @item.CreatedAt.ToString("H:mm d/MM/yyyy")</span></i>
+                            <br />
+                            @item.Body
+                        </p>
+                    }
+                }
+            </div>
+            <form asp-controller="Messages" asp-action="Create">
+                <input type="hidden" name="ToUserId" value="@Model.Student.UserId" class="form-control" />
+                <input type="hidden" name="type" value="Student" class="form-control" />
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="Body" class="form-control" placeholder="Type a message" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default">Send</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        var element = document.getElementById("messages");
+        element.scrollTop = element.scrollHeight;
+    </script>
+}

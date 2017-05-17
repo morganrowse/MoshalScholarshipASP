@@ -1,0 +1,59 @@
+@model IEnumerable<MoshalScholarship.Models.Student>
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h2>Students</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Degree)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Institution)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Faculty)
+                </th>
+                <th>
+                    Buddies
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.User.FirstName, @item.User.LastName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Degree)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Institution)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Faculty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentCount)
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-flex">
+                            <a class="btn btn-default btn-sm" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

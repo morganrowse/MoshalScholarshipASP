@@ -1,0 +1,59 @@
+@model MoshalScholarship.Models.Mentee
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Mentee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="ID" />
+        <dt>
+            @Html.DisplayNameFor(model => model.StartAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndedAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndedAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Accepted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Accepted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Mentor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mentor.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Student)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Student.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>
